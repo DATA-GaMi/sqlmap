@@ -186,232 +186,232 @@ def cmdLineParser(argv=None):
                              help="忽略响应中的 Set-Cookie 标头")
 
         request.add_argument("--mobile", dest="mobile", action="store_true",
-                             help="Imitate smartphone through HTTP User-Agent header")
+                             help="通过 HTTP User-Agent 标头模仿智能手机")
 
         request.add_argument("--random-agent", dest="randomAgent", action="store_true",
-                             help="Use randomly selected HTTP User-Agent header value")
+                             help="使用随机选择的 HTTP User-Agent 标头值")
 
         request.add_argument("--host", dest="host",
-                             help="HTTP Host header value")
+                             help="HTTP 主机标头值")
 
         request.add_argument("--referer", dest="referer",
-                             help="HTTP Referer header value")
+                             help="HTTP Referer 标头值")
 
         request.add_argument("--headers", dest="headers",
-                             help="Extra headers (e.g. \"Accept-Language: fr\\nETag: 123\")")
+                             help="额外的Headers (e.g. \"Accept-Language: fr\\nETag: 123\")")
 
         request.add_argument("--auth-type", dest="authType",
-                             help="HTTP authentication type (Basic, Digest, Bearer, ...)")
+                             help="HTTP 身份验证类型（Basic、Digest、Bearer……）")
 
         request.add_argument("--auth-cred", dest="authCred",
-                             help="HTTP authentication credentials (name:password)")
+                             help="HTTP 身份验证凭证（名称：密码）")
 
         request.add_argument("--auth-file", dest="authFile",
-                             help="HTTP authentication PEM cert/private key file")
+                             help="HTTP 身份验证 PEM 证书/私钥文件")
 
         request.add_argument("--abort-code", dest="abortCode",
-                             help="Abort on (problematic) HTTP error code(s) (e.g. 401)")
+                             help="出现（有问题的）HTTP 错误代码时中止（例如 401）")
 
         request.add_argument("--ignore-code", dest="ignoreCode",
-                             help="Ignore (problematic) HTTP error code(s) (e.g. 401)")
+                             help="忽略（有问题的）HTTP 错误代码（例如 401）")
 
         request.add_argument("--ignore-proxy", dest="ignoreProxy", action="store_true",
-                             help="Ignore system default proxy settings")
+                             help="忽略系统默认代理设置")
 
         request.add_argument("--ignore-redirects", dest="ignoreRedirects", action="store_true",
-                             help="Ignore redirection attempts")
+                             help="忽略重定向尝试")
 
         request.add_argument("--ignore-timeouts", dest="ignoreTimeouts", action="store_true",
-                             help="Ignore connection timeouts")
+                             help="忽略连接超时")
 
         request.add_argument("--proxy", dest="proxy",
-                             help="Use a proxy to connect to the target URL")
+                             help="使用代理连接到目标 URL")
 
         request.add_argument("--proxy-cred", dest="proxyCred",
-                             help="Proxy authentication credentials (name:password)")
+                             help="代理身份验证凭据（名称：密码）")
 
         request.add_argument("--proxy-file", dest="proxyFile",
-                             help="Load proxy list from a file")
+                             help="从文件加载代理列表")
 
         request.add_argument("--proxy-freq", dest="proxyFreq", type=int,
-                             help="Requests between change of proxy from a given list")
+                             help="从给定列表更改代理之间的请求")
 
         request.add_argument("--tor", dest="tor", action="store_true",
-                             help="Use Tor anonymity network")
+                             help="使用 Tor 匿名网络")
 
         request.add_argument("--tor-port", dest="torPort",
-                             help="Set Tor proxy port other than default")
+                             help="设置 Tor 代理端口（非默认端口）")
 
         request.add_argument("--tor-type", dest="torType",
-                             help="Set Tor proxy type (HTTP, SOCKS4 or SOCKS5 (default))")
+                             help="设置 Tor 代理类型（HTTP、SOCKS4 或 SOCKS5（默认））")
 
         request.add_argument("--check-tor", dest="checkTor", action="store_true",
-                             help="Check to see if Tor is used properly")
+                             help="检查 Tor 是否正确使用")
 
         request.add_argument("--delay", dest="delay", type=float,
-                             help="Delay in seconds between each HTTP request")
+                             help="每次 HTTP 请求之间的延迟（以秒为单位）")
 
         request.add_argument("--timeout", dest="timeout", type=float,
-                             help="Seconds to wait before timeout connection (default %d)" % defaults.timeout)
+                             help="连接超时前等待的秒数 (default %d)" % defaults.timeout)
 
         request.add_argument("--retries", dest="retries", type=int,
-                             help="Retries when the connection timeouts (default %d)" % defaults.retries)
+                             help="连接超时重试 (default %d)" % defaults.retries)
 
         request.add_argument("--retry-on", dest="retryOn",
-                             help="Retry request on regexp matching content (e.g. \"drop\")")
+                             help="正则表达式匹配内容时重试请求 (e.g. \"drop\")")
 
         request.add_argument("--randomize", dest="rParam",
-                             help="Randomly change value for given parameter(s)")
+                             help="随机改变给定参数的值")
 
         request.add_argument("--safe-url", dest="safeUrl",
-                             help="URL address to visit frequently during testing")
+                             help="测试时经常访问的URL地址")
 
         request.add_argument("--safe-post", dest="safePost",
-                             help="POST data to send to a safe URL")
+                             help="将数据发送到安全的 URL")
 
         request.add_argument("--safe-req", dest="safeReqFile",
-                             help="Load safe HTTP request from a file")
+                             help="从文件加载安全的 HTTP 请求")
 
         request.add_argument("--safe-freq", dest="safeFreq", type=int,
-                             help="Regular requests between visits to a safe URL")
+                             help="在访问安全 URL 期间定期发出请求")
 
         request.add_argument("--skip-urlencode", dest="skipUrlEncode", action="store_true",
-                             help="Skip URL encoding of payload data")
+                             help="跳过有效载荷数据的 URL 编码")
 
         request.add_argument("--csrf-token", dest="csrfToken",
-                             help="Parameter used to hold anti-CSRF token")
+                             help="用于保存反 CSRF 令牌的参数")
 
         request.add_argument("--csrf-url", dest="csrfUrl",
-                             help="URL address to visit for extraction of anti-CSRF token")
+                             help="用于提取反CSRF令牌的访问URL地址")
 
         request.add_argument("--csrf-method", dest="csrfMethod",
-                             help="HTTP method to use during anti-CSRF token page visit")
+                             help="访问反 CSRF 令牌页面时使用的 HTTP 方法")
 
         request.add_argument("--csrf-data", dest="csrfData",
-                             help="POST data to send during anti-CSRF token page visit")
+                             help="访问反 CSRF 令牌页面时发送的 POST 数据")
 
         request.add_argument("--csrf-retries", dest="csrfRetries", type=int,
-                             help="Retries for anti-CSRF token retrieval (default %d)" % defaults.csrfRetries)
+                             help="重试反 CSRF 令牌检索 (default %d)" % defaults.csrfRetries)
 
         request.add_argument("--force-ssl", dest="forceSSL", action="store_true",
-                             help="Force usage of SSL/HTTPS")
+                             help="强制使用 SSL/HTTPS")
 
         request.add_argument("--chunked", dest="chunked", action="store_true",
-                             help="Use HTTP chunked transfer encoded (POST) requests")
+                             help="使用 HTTP 分块传输编码 (POST) 请求")
 
         request.add_argument("--hpp", dest="hpp", action="store_true",
-                             help="Use HTTP parameter pollution method")
+                             help="使用HTTP参数污染方法")
 
         request.add_argument("--eval", dest="evalCode",
-                             help="Evaluate provided Python code before the request (e.g. \"import hashlib;id2=hashlib.md5(id).hexdigest()\")")
+                             help="在请求之前评估提供的 Python 代码(e.g. \"import hashlib;id2=hashlib.md5(id).hexdigest()\")")
 
         # Optimization options
         optimization = parser.add_argument_group("Optimization",
-                                                 "These options can be used to optimize the performance of sqlmap")
+                                                 "这些选项可用于优化 sqlmap 的性能")
 
         optimization.add_argument("-o", dest="optimize", action="store_true",
-                                  help="Turn on all optimization switches")
+                                  help="开启所有优化开关")
 
         optimization.add_argument("--predict-output", dest="predictOutput", action="store_true",
-                                  help="Predict common queries output")
+                                  help="预测常见查询输出")
 
         optimization.add_argument("--keep-alive", dest="keepAlive", action="store_true",
-                                  help="Use persistent HTTP(s) connections")
+                                  help="使用持久 HTTP(s) 连接")
 
         optimization.add_argument("--null-connection", dest="nullConnection", action="store_true",
-                                  help="Retrieve page length without actual HTTP response body")
+                                  help="检索没有实际 HTTP 响应主体的页面长度")
 
         optimization.add_argument("--threads", dest="threads", type=int,
-                                  help="Max number of concurrent HTTP(s) requests (default %d)" % defaults.threads)
+                                  help="最大并发 HTTP(s) 请求数 (default %d)" % defaults.threads)
 
         # Injection options
         injection = parser.add_argument_group("Injection",
-                                              "These options can be used to specify which parameters to test for, provide custom injection payloads and optional tampering scripts")
+                                              "这些选项可用于指定要测试的参数，提供自定义注入负载和可选的篡改脚本")
 
         injection.add_argument("-p", dest="testParameter",
-                               help="Testable parameter(s)")
+                               help="可测试参数")
 
         injection.add_argument("--skip", dest="skip",
-                               help="Skip testing for given parameter(s)")
+                               help="跳过给定参数的测试")
 
         injection.add_argument("--skip-static", dest="skipStatic", action="store_true",
-                               help="Skip testing parameters that not appear to be dynamic")
+                               help="跳过测试那些看起来不是动态的参数")
 
         injection.add_argument("--param-exclude", dest="paramExclude",
-                               help="Regexp to exclude parameters from testing (e.g. \"ses\")")
+                               help="正则表达式从测试中排除参数 (e.g. \"ses\")")
 
         injection.add_argument("--param-filter", dest="paramFilter",
-                               help="Select testable parameter(s) by place (e.g. \"POST\")")
+                               help="按位置选择可测试参数 (e.g. \"POST\")")
 
         injection.add_argument("--dbms", dest="dbms",
-                               help="Force back-end DBMS to provided value")
+                               help="强制后端 DBMS 提供值")
 
         injection.add_argument("--dbms-cred", dest="dbmsCred",
-                               help="DBMS authentication credentials (user:password)")
+                               help="DBMS 身份验证凭据（用户：密码）")
 
         injection.add_argument("--os", dest="os",
-                               help="Force back-end DBMS operating system to provided value")
+                               help="强制后端 DBMS 操作系统提供值")
 
         injection.add_argument("--invalid-bignum", dest="invalidBignum", action="store_true",
-                               help="Use big numbers for invalidating values")
+                               help="使用大数字来使值无效")
 
         injection.add_argument("--invalid-logical", dest="invalidLogical", action="store_true",
-                               help="Use logical operations for invalidating values")
+                               help="使用逻辑运算使值无效")
 
         injection.add_argument("--invalid-string", dest="invalidString", action="store_true",
-                               help="Use random strings for invalidating values")
+                               help="使用随机字符串使值无效")
 
         injection.add_argument("--no-cast", dest="noCast", action="store_true",
-                               help="Turn off payload casting mechanism")
+                               help="关闭payload投射机制")
 
         injection.add_argument("--no-escape", dest="noEscape", action="store_true",
-                               help="Turn off string escaping mechanism")
+                               help="关闭字符串转义机制")
 
         injection.add_argument("--prefix", dest="prefix",
-                               help="Injection payload prefix string")
+                               help="注入有效载荷前缀字符串")
 
         injection.add_argument("--suffix", dest="suffix",
-                               help="Injection payload suffix string")
+                               help="注入payload后缀字符串")
 
         injection.add_argument("--tamper", dest="tamper",
-                               help="Use given script(s) for tampering injection data")
+                               help="使用给定的脚本篡改注入数据")
 
         # Detection options
-        detection = parser.add_argument_group("Detection", "These options can be used to customize the detection phase")
+        detection = parser.add_argument_group("Detection", "这些选项可用于定制检测阶段")
 
         detection.add_argument("--level", dest="level", type=int,
-                               help="Level of tests to perform (1-5, default %d)" % defaults.level)
+                               help="要执行的测试级别 (1-5, default %d)" % defaults.level)
 
         detection.add_argument("--risk", dest="risk", type=int,
-                               help="Risk of tests to perform (1-3, default %d)" % defaults.risk)
+                               help="执行测试的风险 (1-3, default %d)" % defaults.risk)
 
         detection.add_argument("--string", dest="string",
-                               help="String to match when query is evaluated to True")
+                               help="当查询结果为 True 时匹配的字符串")
 
         detection.add_argument("--not-string", dest="notString",
-                               help="String to match when query is evaluated to False")
+                               help="当查询结果为 False 时匹配的字符串")
 
         detection.add_argument("--regexp", dest="regexp",
-                               help="Regexp to match when query is evaluated to True")
+                               help="当查询结果为 True 时匹配的正则表达式")
 
         detection.add_argument("--code", dest="code", type=int,
-                               help="HTTP code to match when query is evaluated to True")
+                               help="当查询结果为 True 时要匹配的 HTTP 代码")
 
         detection.add_argument("--smart", dest="smart", action="store_true",
-                               help="Perform thorough tests only if positive heuristic(s)")
+                               help="仅在有积极启发式结果时才进行彻底测试")
 
         detection.add_argument("--text-only", dest="textOnly", action="store_true",
-                               help="Compare pages based only on the textual content")
+                               help="仅根据文本内容比较页面")
 
         detection.add_argument("--titles", dest="titles", action="store_true",
-                               help="Compare pages based only on their titles")
+                               help="仅根据标题比较页面")
 
         # Techniques options
         techniques = parser.add_argument_group("Techniques",
-                                               "These options can be used to tweak testing of specific SQL injection techniques")
+                                               "这些选项可用于调整特定 SQL 注入技术的测试")
 
         techniques.add_argument("--technique", dest="technique",
-                                help="SQL injection techniques to use (default \"%s\")" % defaults.technique)
+                                help="要使用的 SQL 注入技术 (default \"%s\")" % defaults.technique)
 
         techniques.add_argument("--time-sec", dest="timeSec", type=int,
                                 help="延迟 DBMS 响应的秒数 (default %d)" % defaults.timeSec)
@@ -921,7 +921,7 @@ def cmdLineParser(argv=None):
         # Dirty hack for inherent help message of switch '-h'
         if hasattr(parser, "get_option"):
             option = parser.get_option("-h")
-            option.help = option.help.capitalize().replace("this help", "basic help")
+            option.help = option.help.capitalize().replace("this help", "基本的帮助")
         else:
             for action in get_actions(parser):
                 if action.option_strings == ["-h", "--help"]:

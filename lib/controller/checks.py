@@ -1419,11 +1419,11 @@ def checkNullConnection():
         kb.nullConnection = _
 
         if _:
-            dbgMsg = "resuming NULL connection method '%s'" % _
+            dbgMsg = "恢复 NULL 连接方法 '%s'" % _
             logger.debug(dbgMsg)
 
     else:
-        infoMsg = "testing NULL connection to the target URL"
+        infoMsg = "测试与目标 URL 的 NULL 连接"
         logger.info(infoMsg)
 
         pushValue(kb.pageCompress)
@@ -1435,7 +1435,7 @@ def checkNullConnection():
             if not page and HTTP_HEADER.CONTENT_LENGTH in (headers or {}):
                 kb.nullConnection = NULLCONNECTION.HEAD
 
-                infoMsg = "NULL connection is supported with HEAD method ('Content-Length')"
+                infoMsg = "HEAD 方法 ('Content-Length') 支持 NULL 连接"
                 logger.info(infoMsg)
             else:
                 page, headers, _ = Request.getPage(auxHeaders={HTTP_HEADER.RANGE: "bytes=-1"})
@@ -1443,7 +1443,7 @@ def checkNullConnection():
                 if page and len(page) == 1 and HTTP_HEADER.CONTENT_RANGE in (headers or {}):
                     kb.nullConnection = NULLCONNECTION.RANGE
 
-                    infoMsg = "NULL connection is supported with GET method ('Range')"
+                    infoMsg = "GET 方法 ('Range') 支持 NULL 连接"
                     logger.info(infoMsg)
                 else:
                     _, headers, _ = Request.getPage(skipRead=True)
@@ -1451,7 +1451,7 @@ def checkNullConnection():
                     if HTTP_HEADER.CONTENT_LENGTH in (headers or {}):
                         kb.nullConnection = NULLCONNECTION.SKIP_READ
 
-                        infoMsg = "NULL connection is supported with 'skip-read' method"
+                        infoMsg = "使用“skip-read”方法支持 NULL 连接"
                         logger.info(infoMsg)
 
         except SqlmapConnectionException:
@@ -1576,9 +1576,9 @@ def checkConnection(suppressOutput=False):
     if conf.cj and not conf.cookie and not any(_[0] == HTTP_HEADER.COOKIE for _ in conf.httpHeaders) and not conf.dropSetCookie:
         candidate = DEFAULT_COOKIE_DELIMITER.join("%s=%s" % (_.name, _.value) for _ in conf.cj)
 
-        message = "you have not declared cookie(s), while "
-        message += "server wants to set its own ('%s'). " % re.sub(r"(=[^=;]{10}[^=;])[^=;]+([^=;]{10})", r"\g<1>...\g<2>", candidate)
-        message += "Do you want to use those [Y/n] "
+        message = "您尚未声明 cookie，而 "
+        message += "服务器希望设置自己的 ('%s'). " % re.sub(r"(=[^=;]{10}[^=;])[^=;]+([^=;]{10})", r"\g<1>...\g<2>", candidate)
+        message += "你想用这些吗 [Y/n] "
         if readInput(message, default='Y', boolean=True):
             kb.mergeCookies = True
             conf.httpHeaders.append((HTTP_HEADER.COOKIE, candidate))

@@ -243,7 +243,7 @@ def checkCharEncoding(encoding, warn=True):
             six.text_type(getBytes(randomStr()), encoding)
         except:
             if warn:
-                warnMsg = "invalid web page charset '%s'" % encoding
+                warnMsg = "网页字符集无效 '%s'" % encoding
                 singleTimeLogMessage(warnMsg, logging.WARN, encoding)
             encoding = None
 
@@ -264,7 +264,7 @@ def getHeuristicCharEncoding(page):
     kb.cache.encoding[key] = retVal
 
     if retVal and retVal.lower().replace('-', "") == UNICODE_ENCODING.lower().replace('-', ""):
-        infoMsg = "heuristics detected web page charset '%s'" % retVal
+        infoMsg = "启发式检测网页字符集 '%s'" % retVal
         singleTimeLogMessage(infoMsg, logging.INFO, retVal)
 
     return retVal
@@ -301,11 +301,11 @@ def decodePage(page, contentEncoding, contentType, percentDecode=True):
             page = data.read()
         except Exception as ex:
             if b"<html" not in page:  # in some cases, invalid "Content-Encoding" appears for plain HTML (should be ignored)
-                errMsg = "detected invalid data for declared content "
-                errMsg += "encoding '%s' ('%s')" % (contentEncoding, getSafeExString(ex))
+                errMsg = "检测到声明内容的无效数据 "
+                errMsg += "编码 '%s' ('%s')" % (contentEncoding, getSafeExString(ex))
                 singleTimeLogMessage(errMsg, logging.ERROR)
 
-                warnMsg = "turning off page compression"
+                warnMsg = "关闭页面压缩"
                 singleTimeWarnMessage(warnMsg)
 
                 kb.pageCompress = False
@@ -322,7 +322,7 @@ def decodePage(page, contentEncoding, contentType, percentDecode=True):
 
         if (any((httpCharset, metaCharset)) and (not all((httpCharset, metaCharset)) or isinstance(page, six.binary_type) and all(_ in PRINTABLE_BYTES for _ in page))) or (httpCharset == metaCharset and all((httpCharset, metaCharset))):
             kb.pageEncoding = httpCharset or metaCharset  # Reference: http://bytes.com/topic/html-css/answers/154758-http-equiv-vs-true-header-has-precedence
-            debugMsg = "declared web page charset '%s'" % kb.pageEncoding
+            debugMsg = "声明的网页字符集 '%s'" % kb.pageEncoding
             singleTimeLogMessage(debugMsg, logging.DEBUG, debugMsg)
         else:
             kb.pageEncoding = None
@@ -388,7 +388,7 @@ def processResponse(page, responseHeaders, code=None, status=None):
         msg = extractErrorMessage(page)
 
         if msg:
-            logger.warning("parsed DBMS error message: '%s'" % msg.rstrip('.'))
+            logger.warning("解析 DBMS 错误消息： '%s'" % msg.rstrip('.'))
 
     if not conf.skipWaf and kb.processResponseCounter < IDENTYWAF_PARSE_LIMIT:
         rawResponse = "%s %s %s\n%s\n%s" % (_http_client.HTTPConnection._http_vsn_str, code or "", status or "", "".join(getUnicode(responseHeaders.headers if responseHeaders else [])), page[:HEURISTIC_PAGE_SIZE_THRESHOLD])
@@ -399,7 +399,7 @@ def processResponse(page, responseHeaders, code=None, status=None):
                 for waf in set(identYwaf.non_blind):
                     if waf not in kb.identifiedWafs:
                         kb.identifiedWafs.add(waf)
-                        errMsg = "WAF/IPS identified as '%s'" % identYwaf.format_name(waf)
+                        errMsg = "WAF/IPS 被识别为 '%s'" % identYwaf.format_name(waf)
                         singleTimeLogMessage(errMsg, logging.CRITICAL)
 
     if kb.originalPage is None:
@@ -411,7 +411,7 @@ def processResponse(page, responseHeaders, code=None, status=None):
                     if conf.paramDict[PLACE.POST][name] in page:
                         continue
                     else:
-                        msg = "do you want to automatically adjust the value of '%s'? [y/N]" % name
+                        msg = "你想自动调整'%s'? [y/N]" % name
 
                         if not readInput(msg, default='N', boolean=True):
                             continue
@@ -421,7 +421,7 @@ def processResponse(page, responseHeaders, code=None, status=None):
 
     if not kb.browserVerification and re.search(r"(?i)browser.?verification", page or ""):
         kb.browserVerification = True
-        warnMsg = "potential browser verification protection mechanism detected"
+        warnMsg = "检测到潜在的浏览器验证保护机制"
         if re.search(r"(?i)CloudFlare", page):
             warnMsg += " (CloudFlare)"
         singleTimeWarnMessage(warnMsg)
@@ -436,11 +436,11 @@ def processResponse(page, responseHeaders, code=None, status=None):
             kb.captchaDetected = True
 
         if kb.captchaDetected:
-            warnMsg = "potential CAPTCHA protection mechanism detected"
+            warnMsg = "检测到潜在的 CAPTCHA 保护机制"
             if re.search(r"(?i)<title>[^<]*CloudFlare", page):
                 warnMsg += " (CloudFlare)"
             singleTimeWarnMessage(warnMsg)
 
     if re.search(BLOCKED_IP_REGEX, page):
-        warnMsg = "it appears that you have been blocked by the target server"
+        warnMsg = "看来你已被目标服务器阻止"
         singleTimeWarnMessage(warnMsg)

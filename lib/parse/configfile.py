@@ -73,7 +73,7 @@ def configFileParser(configFile):
         else:
             config.readfp(configFP)
     except Exception as ex:
-        errMsg = "you have provided an invalid and/or unreadable configuration file ('%s')" % getSafeExString(ex)
+        errMsg = "您提供了无效且/或无法读取的配置文件 ('%s')" % getSafeExString(ex)
         raise SqlmapSyntaxException(errMsg)
 
     if not config.has_section("Target"):

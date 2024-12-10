@@ -17,11 +17,12 @@ from thirdparty.six.moves import http_client as _http_client
 
 abortedFlag = None
 
+
 def parseSitemap(url, retVal=None):
     global abortedFlag
 
     if retVal is not None:
-        logger.debug("parsing sitemap '%s'" % url)
+        logger.debug("解析网站地图 '%s'" % url)
 
     try:
         if retVal is None:
@@ -31,7 +32,7 @@ def parseSitemap(url, retVal=None):
         try:
             content = Request.getPage(url=url, raise404=True)[0] if not abortedFlag else ""
         except _http_client.InvalidURL:
-            errMsg = "invalid URL given for sitemap ('%s')" % url
+            errMsg = "站点地图的 URL 无效 ('%s')" % url
             raise SqlmapSyntaxException(errMsg)
 
         for match in re.finditer(r"<loc>\s*([^<]+)", content or ""):
@@ -40,7 +41,7 @@ def parseSitemap(url, retVal=None):
             url = match.group(1).strip()
             if url.endswith(".xml") and "sitemap" in url.lower():
                 if kb.followSitemapRecursion is None:
-                    message = "sitemap recursion detected. Do you want to follow? [y/N] "
+                    message = "检测到站点地图递归。要跟随吗？ [y/N] "
                     kb.followSitemapRecursion = readInput(message, default='N', boolean=True)
                 if kb.followSitemapRecursion:
                     parseSitemap(url, retVal)
@@ -49,8 +50,8 @@ def parseSitemap(url, retVal=None):
 
     except KeyboardInterrupt:
         abortedFlag = True
-        warnMsg = "user aborted during sitemap parsing. sqlmap "
-        warnMsg += "will use partial list"
+        warnMsg = "用户在站点地图解析期间中止。sqlmap "
+        warnMsg += "将使用部分列表"
         logger.warning(warnMsg)
 
     return retVal
