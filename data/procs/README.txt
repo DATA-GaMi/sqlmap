@@ -1,4 +1,3 @@
-Files in this folder represent SQL snippets used by sqlmap on the target
-system.
-They are licensed under the terms of the GNU Lesser General Public License
-where not specified otherwise.
+此文件夹中的文件代表目标系统上 sqlmap 使用的 SQL 代码片段。
+
+除非另有说明，否则它们均根据 GNU 宽通用公共许可证的条款获得许可。

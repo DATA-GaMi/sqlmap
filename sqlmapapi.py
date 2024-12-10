@@ -95,14 +95,14 @@ def main():
 
     # Parse command line options
     apiparser = ArgumentParser()
-    apiparser.add_argument("-s", "--server", help="Run as a REST-JSON API server", action="store_true")
-    apiparser.add_argument("-c", "--client", help="Run as a REST-JSON API client", action="store_true")
-    apiparser.add_argument("-H", "--host", help="Host of the REST-JSON API server (default \"%s\")" % RESTAPI_DEFAULT_ADDRESS, default=RESTAPI_DEFAULT_ADDRESS)
-    apiparser.add_argument("-p", "--port", help="Port of the REST-JSON API server (default %d)" % RESTAPI_DEFAULT_PORT, default=RESTAPI_DEFAULT_PORT, type=int)
-    apiparser.add_argument("--adapter", help="Server (bottle) adapter to use (default \"%s\")" % RESTAPI_DEFAULT_ADAPTER, default=RESTAPI_DEFAULT_ADAPTER)
-    apiparser.add_argument("--database", help="Set IPC database filepath (optional)")
-    apiparser.add_argument("--username", help="Basic authentication username (optional)")
-    apiparser.add_argument("--password", help="Basic authentication password (optional)")
+    apiparser.add_argument("-s", "--server", help="作为 REST-JSON API 服务器运行", action="store_true")
+    apiparser.add_argument("-c", "--client", help="作为 REST-JSON API 客户端运行", action="store_true")
+    apiparser.add_argument("-H", "--host", help="REST-JSON API 服务器的主机 (默认 \"%s\")" % RESTAPI_DEFAULT_ADDRESS, default=RESTAPI_DEFAULT_ADDRESS)
+    apiparser.add_argument("-p", "--port", help="REST-JSON API 服务器的端口 (默认 %d)" % RESTAPI_DEFAULT_PORT, default=RESTAPI_DEFAULT_PORT, type=int)
+    apiparser.add_argument("--adapter", help="要使用的服务器（bottle）适配器 (默认 \"%s\")" % RESTAPI_DEFAULT_ADAPTER, default=RESTAPI_DEFAULT_ADAPTER)
+    apiparser.add_argument("--database", help="设置 IPC 数据库文件路径（可选）")
+    apiparser.add_argument("--username", help="基本身份验证用户名（可选）")
+    apiparser.add_argument("--password", help="基本认证密码（可选）")
     (args, _) = apiparser.parse_known_args() if hasattr(apiparser, "parse_known_args") else apiparser.parse_args()
 
 
